@@ -6,6 +6,6 @@ internal class MrzTest {
 
     @Test
     fun mrz() {
-        val mrz = Mrz("")
+        // val mrz = Mrz()
     }
 }

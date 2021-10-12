@@ -23,7 +23,7 @@ class FrenchIdParserTest {
     }
 
     @Test
-    fun parseFranchId() {
+    fun parseFrenchId() {
         sut.parse(Resources.FRENCH_ID.split("\n"), MrzParserOptions()).`should be equal to`(
             Mrz(
                 format = MrzFormat.FRENCH_ID,

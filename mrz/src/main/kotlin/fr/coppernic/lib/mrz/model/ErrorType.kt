@@ -6,7 +6,7 @@ sealed class ErrorType(
     object Unknown : ErrorType("Unknown error")
     class WrongFormat(
         val msg: String = ""
-    ) : ErrorType("Wrong format")
+    ) : ErrorType("Wrong format $msg")
     class UnsupportedDocumentType(
         code: String
     ) : ErrorType("Unsupported document code: $code")

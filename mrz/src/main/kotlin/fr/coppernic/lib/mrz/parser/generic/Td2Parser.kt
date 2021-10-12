@@ -13,7 +13,7 @@ import fr.coppernic.lib.mrz.parser.extensions.extractNames
 /**
  * Passport parser
  */
-class Td2Parser : DocumentParser {
+internal class Td2Parser : DocumentParser {
     companion object {
         private val docRange = 0..1
         private val countryRange = 2..4

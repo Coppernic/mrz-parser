@@ -10,7 +10,7 @@ import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.extensions.extract
 import fr.coppernic.lib.mrz.parser.extensions.extractNames
 
-class Td1Parser : DocumentParser {
+internal class Td1Parser : DocumentParser {
     companion object {
         private val docRange = 0..1
         private val countryRange = 2..4

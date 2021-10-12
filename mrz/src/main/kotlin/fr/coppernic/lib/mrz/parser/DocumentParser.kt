@@ -12,7 +12,7 @@ interface DocumentParser {
         fun make(format: MrzFormat?): DocumentParser {
             return when (format) {
                 MrzFormat.TD1 -> Td1Parser()
-                MrzFormat.TD2 -> TODO() // Td2Parser()
+                MrzFormat.TD2 -> Td2Parser()
                 MrzFormat.TD3 -> Td3Parser()
                 else -> throw MrzParserException(ErrorType.WrongFormat())
             }

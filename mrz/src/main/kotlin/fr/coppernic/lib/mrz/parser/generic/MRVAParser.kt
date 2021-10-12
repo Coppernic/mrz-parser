@@ -1,10 +1,12 @@
-package fr.coppernic.lib.mrz.parser
+package fr.coppernic.lib.mrz.parser.generic
 
 import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.MrzBuilder
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzSex
+import fr.coppernic.lib.mrz.parser.DocumentParser
+import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.extensions.extract
 import fr.coppernic.lib.mrz.parser.extensions.extractNames
 

@@ -43,4 +43,8 @@ object Resources {
             V<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<
             L8988901C4XXX4009078F9612109<<<<<<<<
     """.trimIndent()
+    val FRENCH_ID = """
+        IDFRABERTHIER<<<<<<<<<<<<<<<<<<<<<<<
+        8806923102858CORINNE<<<<<<<6512068F6
+    """.trimIndent()
 }

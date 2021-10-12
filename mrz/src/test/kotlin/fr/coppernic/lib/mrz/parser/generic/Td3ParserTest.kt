@@ -1,10 +1,11 @@
-package fr.coppernic.lib.mrz.parser
+package fr.coppernic.lib.mrz.parser.generic
 
 import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzSex
+import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources
 import org.amshove.kluent.`should be equal to`
 import org.junit.Before

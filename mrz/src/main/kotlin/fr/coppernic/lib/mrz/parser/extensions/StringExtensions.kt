@@ -1,7 +1,10 @@
 package fr.coppernic.lib.mrz.parser.extensions
 
+import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.mrz.model.ErrorType
 import fr.coppernic.lib.mrz.model.MrzParserException
+import java.text.SimpleDateFormat
+import java.util.Date
 
 internal fun String.sanitize(): String = replace("<", " ").trim()
 
@@ -17,6 +20,17 @@ internal fun String.computeCheckDigit(): Int {
     return toCharArray().foldIndexed(0) { index, acc, c ->
         acc + c.toNumber() * weight[index % 3]
     } % 10
+}
+
+internal fun String.extractDate(format: SimpleDateFormat): Date? {
+    return try {
+        format.parse(this)
+    } catch (e: Exception) {
+        if (LogDefines.verbose) {
+            LogDefines.LOG.debug("$e, during parsing of $this with format ${format.toPattern()}")
+        }
+        null
+    }
 }
 
 internal fun Char.toNumber(): Int {

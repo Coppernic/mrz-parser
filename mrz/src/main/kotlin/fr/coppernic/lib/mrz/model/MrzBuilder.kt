@@ -6,6 +6,7 @@ import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.extensions.DateExtensions
 import fr.coppernic.lib.mrz.parser.extensions.computeCheckDigit
+import fr.coppernic.lib.mrz.parser.extensions.extractDate
 
 class MrzBuilder(
     val opt: MrzParserOptions
@@ -38,10 +39,10 @@ class MrzBuilder(
             documentNumber = documentNumber,
             documentNumberHashValid = checkHash(documentNumber, documentNumberHash, "documentNumber", opt),
             nationalityCountryCode = nationalityCountryCode,
-            birthdate = DateExtensions.mrzDateFormat.parse(birthdate),
+            birthdate = birthdate.extractDate(DateExtensions.mrzDateFormat),
             birthdateHashValid = checkHash(birthdate, birthdateHash, "birthdate", opt),
             sex = sex,
-            expiryDate = DateExtensions.mrzDateExpiryFormat.parse(expiryDate),
+            expiryDate = expiryDate.extractDate(DateExtensions.mrzDateExpiryFormat),
             expiryDateHashValid = checkHash(expiryDate, expiryDateHash, "expiryDate", opt),
             optionalData = optionalData,
             optionalData2 = optionalData2,

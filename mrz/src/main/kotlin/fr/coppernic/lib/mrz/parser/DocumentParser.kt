@@ -4,6 +4,11 @@ import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.ErrorType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzParserException
+import fr.coppernic.lib.mrz.parser.generic.MRVAParser
+import fr.coppernic.lib.mrz.parser.generic.MRVBParser
+import fr.coppernic.lib.mrz.parser.generic.Td1Parser
+import fr.coppernic.lib.mrz.parser.generic.Td2Parser
+import fr.coppernic.lib.mrz.parser.generic.Td3Parser
 
 interface DocumentParser {
     fun parse(lines: List<String>, opt: MrzParserOptions): Mrz

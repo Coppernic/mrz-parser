@@ -9,4 +9,5 @@ enum class MrzFormat(
     TD3(2, 44),
     MRVA(2, 44),
     MRVB(2, 36),
+    FRENCH_ID(2, 36)
 }

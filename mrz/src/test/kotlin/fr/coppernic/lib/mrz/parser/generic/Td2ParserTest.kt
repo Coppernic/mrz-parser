@@ -1,39 +1,41 @@
-package fr.coppernic.lib.mrz.parser
+package fr.coppernic.lib.mrz.parser.generic
 
 import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzSex
+import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources
 import org.amshove.kluent.`should be equal to`
 import org.junit.Before
 import org.junit.Test
 
-class MRVAParserTest {
-    private lateinit var sut: MRVAParser
+class Td2ParserTest {
+
+    private lateinit var sut: Td2Parser
 
     @Before
     fun setUp() {
         LogDefines.verbose = true
-        sut = MRVAParser()
+        sut = Td2Parser()
     }
 
     @Test
-    fun parseMrva() {
-        sut.parse(Resources.MRVA.split("\n"), MrzParserOptions()).`should be equal to`(
+    fun parseTd2() {
+        sut.parse(Resources.TD2.split("\n"), MrzParserOptions()).`should be equal to`(
             Mrz(
-                format = MrzFormat.MRVA,
-                documentType = MrzDocumentType.TypeV,
+                format = MrzFormat.TD2,
+                documentType = MrzDocumentType.TypeI,
                 countryCode = "UTO",
                 surnames = "ERIKSSON",
                 givenNames = "ANNA MARIA",
-                documentNumber = "L8988901C",
-                nationalityCountryCode = "XXX",
-                birthdate = Td3ParserTest.dateFormat.parse("1940-09-07"),
+                documentNumber = "D23145890",
+                nationalityCountryCode = "UTO",
+                birthdate = Td3ParserTest.dateFormat.parse("1974-08-12"),
                 sex = MrzSex.Female,
-                expiryDate = Td3ParserTest.dateFormat.parse("1996-12-10"),
-                optionalData = "6ZE184226B",
+                expiryDate = Td3ParserTest.dateFormat.parse("2012-04-15"),
+                optionalData = "",
                 optionalData2 = "",
             )
         )

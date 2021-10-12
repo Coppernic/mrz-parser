@@ -12,7 +12,7 @@ import fr.coppernic.lib.mrz.parser.extensions.extract
 /**
  * Passport parser
  */
-class FrenchIdParser : DocumentParser {
+internal class FrenchIdParser : DocumentParser {
     companion object {
         private val docRange = 0..1
         private val countryRange = 2..4

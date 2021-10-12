@@ -20,6 +20,9 @@ data class Mrz(
     val sex: MrzSex,
     val expiryDate: Date?,
     val optionalData: String?,
-    // / `nil` if not provided
-    val optionalData2: String?
+    val optionalData2: String?,
+    val documentNumberHashValid: Boolean = true,
+    val birthdateHashValid: Boolean = true,
+    val expiryDateHashValid: Boolean = true,
+    val finalHashValid: Boolean = true,
 )

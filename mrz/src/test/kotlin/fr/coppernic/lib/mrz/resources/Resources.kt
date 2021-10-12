@@ -19,7 +19,11 @@ object Resources {
             P<UTOERIKSSON<<ANNA<MARIA<<<<<<<<<<<<<<<<<<<
             L898902C36UTO7408122F1204159ZE184226B<<<<<10
     """.trimIndent()
-    val PASSPORT = """
+    val PASSPORT_D = """
+            P<UTODOE<<JANE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            2424110103D<<6908083F1208024<<<<<<<<<<<<<<<8
+    """.trimIndent()
+    val PASSPORT_R = """
             P<RUSIMIAREK<<EVGENII<<<<<<<<<<<<<<<<<<<<<<<
             1104000008RUS8209120M2601157<<<<<<<<<<<<<<06
     """.trimIndent()

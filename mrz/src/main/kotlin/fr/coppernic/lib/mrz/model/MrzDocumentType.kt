@@ -1,5 +1,7 @@
 package fr.coppernic.lib.mrz.model
 
+import fr.coppernic.lib.mrz.parser.extensions.sanitize
+
 /**
  * List of supported document types
  */
@@ -44,7 +46,7 @@ enum class MrzDocumentType {
     companion object {
         fun fromMrz(mrz: String): MrzDocumentType {
             // 2-letter checks
-            return when (mrz) {
+            return when (mrz.sanitize()) {
                 "AC" -> CrewMember
                 "ME" -> Migrant
                 "TD" -> Migrant // travel document

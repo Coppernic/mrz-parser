@@ -5,7 +5,6 @@ import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzParserException
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.ParserFactory
-import fr.coppernic.lib.mrz.parser.extensions.extract
 
 class MrzParser {
     fun parseOrNull(s: String, opt: MrzParserOptions = MrzParserOptions()): Mrz? {
@@ -50,7 +49,7 @@ class MrzParser {
             throw MrzParserException(ErrorType.WrongFormat("Not enough length (${first.length})"))
         }
 
-        val docType = first.extract(docRange)
+        val docType = first.substring(docRange)
         val lineCount = lines.size
         val lineLen = lines.getAndVerifyLen()
         var format: MrzFormat? = null

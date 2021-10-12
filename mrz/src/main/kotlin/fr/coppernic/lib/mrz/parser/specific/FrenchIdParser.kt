@@ -1,13 +1,13 @@
 package fr.coppernic.lib.mrz.parser.specific
 
 import fr.coppernic.lib.mrz.Mrz
-import fr.coppernic.lib.mrz.model.MrzBuilder
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzSex
 import fr.coppernic.lib.mrz.parser.DocumentParser
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
-import fr.coppernic.lib.mrz.parser.extensions.extract
+import fr.coppernic.lib.mrz.parser.builder.MrzBuilder
+import fr.coppernic.lib.mrz.parser.extensions.sanitize
 
 /**
  * Passport parser
@@ -36,11 +36,11 @@ internal class FrenchIdParser : DocumentParser {
         val second = lines[1]
         return MrzBuilder(opt).apply {
             format = MrzFormat.FRENCH_ID
-            documentType = MrzDocumentType.fromMrz(first.extract(docRange))
-            countryCode = first.extract(countryRange)
+            documentType = MrzDocumentType.fromMrz(first.substring(docRange))
+            countryCode = first.substring(countryRange)
             documentNumber = second.substring(documentNumberRange)
             documentNumberHash = second.substring(documentNumberHashRange).toInt()
-            optionalData = first.extract(opt1Range)
+            optionalData = first.substring(opt1Range)
             birthdate = second.substring(birthDateRange)
             birthdateHash = second.substring(birthdayHashRange).toInt()
             sex = MrzSex.fromMrz(second[sexRange])
@@ -50,8 +50,8 @@ internal class FrenchIdParser : DocumentParser {
             }
 
             finalHash = second.substring(finalHashRange).toInt()
-            surnames = first.extract(surnameRange)
-            givenNames = second.extract(givenNameRange)
+            surnames = first.substring(surnameRange).sanitize()
+            givenNames = second.substring(givenNameRange).sanitize()
         }.build()
     }
 }

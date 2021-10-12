@@ -8,8 +8,6 @@ import java.util.Date
 
 internal fun String.sanitize(): String = replace("<", " ").trim()
 
-internal fun String.extract(r: IntRange): String = substring(r).sanitize()
-
 internal fun String.extractNumber(r: IntRange): Int = substring(r).sanitize().toIntOrNull() ?: 0
 
 internal fun String.extractNames(r: IntRange = 0 until length): Pair<String, String> =
@@ -17,10 +15,10 @@ internal fun String.extractNames(r: IntRange = 0 until length): Pair<String, Str
         (getOrElse(0) { "" }.sanitize()) to (getOrElse(1) { "" }.sanitize())
     }
 
-internal fun String.computeCheckDigit(): Int {
+internal fun String.computeCheckDigit(lenient: Boolean = false): Int {
     val weight = arrayOf(7, 3, 1)
     return toCharArray().foldIndexed(0) { index, acc, c ->
-        acc + c.toNumber() * weight[index % 3]
+        acc + c.toNumber(lenient) * weight[index % 3]
     } % 10
 }
 
@@ -35,11 +33,17 @@ internal fun String.extractDate(format: SimpleDateFormat): Date? {
     }
 }
 
-internal fun Char.toNumber(): Int {
+internal fun Char.toNumber(lenient: Boolean = false): Int {
     return when (this) {
         in 'A'..'Z' -> this - 'A' + 10
         in '0'..'9' -> this - '0'
         '<' -> 0
-        else -> throw MrzParserException(ErrorType.WrongFormat())
+        else -> {
+            if (lenient) {
+                0
+            } else {
+                throw MrzParserException(ErrorType.WrongFormat())
+            }
+        }
     }
 }

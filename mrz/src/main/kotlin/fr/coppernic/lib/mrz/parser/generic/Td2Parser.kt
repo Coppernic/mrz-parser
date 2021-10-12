@@ -9,6 +9,7 @@ import fr.coppernic.lib.mrz.parser.DocumentParser
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.extensions.extract
 import fr.coppernic.lib.mrz.parser.extensions.extractNames
+import fr.coppernic.lib.mrz.parser.extensions.extractNumber
 
 /**
  * Passport parser
@@ -43,18 +44,18 @@ internal class Td2Parser : DocumentParser {
             documentType = MrzDocumentType.fromMrz(first.extract(docRange))
             countryCode = first.extract(countryRange)
             documentNumber = second.substring(documentNumberRange)
-            documentNumberHash = second.substring(documentNumberHashRange).toInt()
+            documentNumberHash = second.extractNumber(documentNumberHashRange)
             optionalData = second.extract(opt1Range)
             birthdate = second.substring(birthDateRange)
-            birthdateHash = second.substring(birthdayHashRange).toInt()
+            birthdateHash = second.extractNumber(birthdayHashRange)
             sex = MrzSex.fromMrz(second[sexRange])
             expiryDate = second.substring(expiryDateRange)
-            expiryDateHash = second.substring(expiryDateHashRange).toInt()
+            expiryDateHash = second.extractNumber(expiryDateHashRange)
             nationalityCountryCode = second.extract(natRange)
             finalHashString = listOfRangesForFinalHash.joinToString("") {
                 lines[it.first].substring(it.second)
             }
-            finalHash = second.substring(finalHashRange).toInt()
+            finalHash = second.extractNumber(finalHashRange)
             first.extractNames(namesRange).let {
                 surnames = it.first
                 givenNames = it.second

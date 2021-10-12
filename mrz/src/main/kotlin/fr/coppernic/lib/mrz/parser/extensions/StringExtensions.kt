@@ -10,6 +10,8 @@ internal fun String.sanitize(): String = replace("<", " ").trim()
 
 internal fun String.extract(r: IntRange): String = substring(r).sanitize()
 
+internal fun String.extractNumber(r: IntRange): Int = substring(r).sanitize().toIntOrNull() ?: 0
+
 internal fun String.extractNames(r: IntRange = 0 until length): Pair<String, String> =
     substring(r).split("<<").run {
         (getOrElse(0) { "" }.sanitize()) to (getOrElse(1) { "" }.sanitize())

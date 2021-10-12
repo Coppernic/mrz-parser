@@ -9,6 +9,9 @@ import fr.coppernic.lib.mrz.parser.generic.Td3ParserTest
 import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID
 import fr.coppernic.lib.mrz.resources.Resources.MRVA
 import fr.coppernic.lib.mrz.resources.Resources.MRVB
+import fr.coppernic.lib.mrz.resources.Resources.NETHERLAND_PASSPORT
+import fr.coppernic.lib.mrz.resources.Resources.PASSPORT_R
+import fr.coppernic.lib.mrz.resources.Resources.RUSSIAN_PASSPORT
 import fr.coppernic.lib.mrz.resources.Resources.TD1
 import fr.coppernic.lib.mrz.resources.Resources.TD1_WRONG
 import fr.coppernic.lib.mrz.resources.Resources.TD2
@@ -166,6 +169,66 @@ class MrzParserTest {
                 optionalData2 = "",
                 expiryDate = null,
                 nationalityCountryCode = "",
+            )
+        )
+    }
+
+    @Test
+    fun testRussian() {
+        sut.parse(PASSPORT_R).shouldBeEqualTo(
+            Mrz(
+                format = MrzFormat.TD3,
+                documentType = MrzDocumentType.Passport,
+                countryCode = "RUS",
+                surnames = "IMIAREK",
+                givenNames = "EVGENII",
+                documentNumber = "110400000",
+                birthdate = Td3ParserTest.dateFormat.parse("1982-09-12"),
+                sex = MrzSex.Male,
+                expiryDate = Td3ParserTest.dateFormat.parse("2026-01-15"),
+                optionalData = "",
+                optionalData2 = "",
+                nationalityCountryCode = "RUS",
+            )
+        )
+    }
+
+    @Test
+    fun testRussian2() {
+        sut.parse(RUSSIAN_PASSPORT).shouldBeEqualTo(
+            Mrz(
+                format = MrzFormat.TD3,
+                documentType = MrzDocumentType.Passport,
+                countryCode = "RUS",
+                surnames = "ZDRIL7K",
+                givenNames = "SERGEQ ANATOL9EVI3",
+                documentNumber = "391935349",
+                birthdate = Td3ParserTest.dateFormat.parse("1972-07-23"),
+                sex = MrzSex.Male,
+                expiryDate = null,
+                optionalData = "4151218910003",
+                optionalData2 = "",
+                nationalityCountryCode = "RUS",
+            )
+        )
+    }
+
+    @Test
+    fun testNetherlandsPassport() {
+        sut.parse(NETHERLAND_PASSPORT).shouldBeEqualTo(
+            Mrz(
+                format = MrzFormat.TD3,
+                documentType = MrzDocumentType.Passport,
+                countryCode = "NLD",
+                surnames = "DE BRUIJN",
+                givenNames = "WILLEKE LISELOTTE",
+                documentNumber = "SPECI2014",
+                birthdate = Td3ParserTest.dateFormat.parse("1965-03-10"),
+                sex = MrzSex.Female,
+                expiryDate = Td3ParserTest.dateFormat.parse("2024-03-09"),
+                optionalData = "999999990",
+                optionalData2 = "",
+                nationalityCountryCode = "NLD",
             )
         )
     }

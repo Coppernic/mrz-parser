@@ -41,7 +41,7 @@ class MrzBuilder(
             birthdate = DateExtensions.mrzDateFormat.parse(birthdate),
             birthdateHashValid = checkHash(birthdate, birthdateHash, "birthdate", opt),
             sex = sex,
-            expiryDate = DateExtensions.mrzDateFormat.parse(expiryDate),
+            expiryDate = DateExtensions.mrzDateExpiryFormat.parse(expiryDate),
             expiryDateHashValid = checkHash(expiryDate, expiryDateHash, "expiryDate", opt),
             optionalData = optionalData,
             optionalData2 = optionalData2,

@@ -14,6 +14,8 @@ interface DocumentParser {
                 MrzFormat.TD1 -> Td1Parser()
                 MrzFormat.TD2 -> Td2Parser()
                 MrzFormat.TD3 -> Td3Parser()
+                MrzFormat.MRVB -> MRVBParser()
+                MrzFormat.MRVA -> MRVAParser()
                 else -> throw MrzParserException(ErrorType.WrongFormat())
             }
         }

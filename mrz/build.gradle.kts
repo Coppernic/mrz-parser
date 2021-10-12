@@ -35,4 +35,5 @@ dependencies {
 
     testImplementation("junit:junit:4.13.1")
     testImplementation("org.amshove.kluent:kluent:1.65")
+    implementation("ch.qos.logback:logback-classic:1.2.6")
 }

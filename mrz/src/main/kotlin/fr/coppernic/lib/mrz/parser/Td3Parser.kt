@@ -8,50 +8,52 @@ import fr.coppernic.lib.mrz.model.MrzSex
 import fr.coppernic.lib.mrz.parser.extensions.extract
 import fr.coppernic.lib.mrz.parser.extensions.extractNames
 
-class Td1Parser : DocumentParser {
+/**
+ * Passport parser
+ */
+class Td3Parser : DocumentParser {
     companion object {
         private val docRange = 0..1
         private val countryRange = 2..4
-        private val documentNumberRange = 5..13
-        private val documentNumberHashRange = 14..14
-        private val opt1Range = 15..29
-        private val birthDateRange = 0..5
-        private val birthdayHashRange = 6..6
-        private const val sexRange = 7
-        private val expiryDateRange = 8..13
-        private val expiryDateHashRange = 14..14
-        private val natRange = 15..17
-        private val opt2Range = 18..28
-        private val finalHashRange = 29..29
-        private val namesRange = 0..29
+        private val documentNumberRange = 0..8
+        private val documentNumberHashRange = 9..9
+        private val opt1Range = 28..41
+        private val birthDateRange = 13..18
+        private val birthdayHashRange = 19..19
+        private const val sexRange = 20
+        private val expiryDateRange = 21..26
+        private val expiryDateHashRange = 27..27
+        private val natRange = 10..12
+        private val finalHashRange = 43..43
         private val listOfRangesForFinalHash = listOf(
-            0 to 5..29, 1 to 0..6, 1 to 8..14, 1 to 18..28
+            1 to 0..9, // Document number + hash, second line
+            1 to 13..19, // Birth date + hash, second line
+            1 to 21..42 // Expiry date + hash + opt + hash, second line
         )
+        private val namesRange = 5..43
     }
 
     override fun parse(lines: List<String>, opt: MrzParserOptions): Mrz {
         val first = lines[0]
         val second = lines[1]
-        val third = lines[2]
         return MrzBuilder(opt).apply {
-            format = MrzFormat.TD1
-            documentType = MrzDocumentType.fromMrz(first.substring(docRange))
+            format = MrzFormat.TD3
+            documentType = MrzDocumentType.fromMrz(first.extract(docRange))
             countryCode = first.extract(countryRange)
-            documentNumber = first.substring(documentNumberRange)
-            documentNumberHash = first.substring(documentNumberHashRange).toInt()
-            optionalData = first.extract(opt1Range)
+            documentNumber = second.substring(documentNumberRange)
+            documentNumberHash = second.substring(documentNumberHashRange).toInt()
+            optionalData = second.extract(opt1Range)
             birthdate = second.substring(birthDateRange)
             birthdateHash = second.substring(birthdayHashRange).toInt()
             sex = MrzSex.fromMrz(second[sexRange])
             expiryDate = second.substring(expiryDateRange)
             expiryDateHash = second.substring(expiryDateHashRange).toInt()
             nationalityCountryCode = second.extract(natRange)
-            optionalData2 = second.extract(opt2Range)
             finalHashString = listOfRangesForFinalHash.joinToString("") {
                 lines[it.first].substring(it.second)
             }
             finalHash = second.substring(finalHashRange).toInt()
-            third.extractNames().let {
+            first.extractNames(namesRange).let {
                 surnames = it.first
                 givenNames = it.second
             }

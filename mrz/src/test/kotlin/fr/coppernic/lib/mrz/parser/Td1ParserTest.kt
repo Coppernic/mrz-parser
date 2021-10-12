@@ -1,5 +1,6 @@
 package fr.coppernic.lib.mrz.parser
 
+import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
@@ -16,12 +17,13 @@ class Td1ParserTest {
 
     @Before
     fun setUp() {
+        LogDefines.verbose = true
         sut = Td1Parser()
     }
 
     @Test
     fun parse() {
-        sut.parse(TD1.split("\n")).`should be equal to`(
+        sut.parse(TD1.split("\n"), MrzParserOptions()).`should be equal to`(
             Mrz(
                 format = MrzFormat.TD1,
                 documentType = MrzDocumentType.TypeI,

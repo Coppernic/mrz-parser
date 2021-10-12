@@ -1,12 +1,18 @@
-package fr.coppernic.lib.mrz.model
+package fr.coppernic.lib.mrz.parser.builder
 
 import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.log.LogDefines.LOG
 import fr.coppernic.lib.mrz.Mrz
+import fr.coppernic.lib.mrz.model.ErrorType
+import fr.coppernic.lib.mrz.model.MrzDocumentType
+import fr.coppernic.lib.mrz.model.MrzFormat
+import fr.coppernic.lib.mrz.model.MrzParserException
+import fr.coppernic.lib.mrz.model.MrzSex
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.parser.extensions.DateExtensions
 import fr.coppernic.lib.mrz.parser.extensions.computeCheckDigit
 import fr.coppernic.lib.mrz.parser.extensions.extractDate
+import fr.coppernic.lib.mrz.parser.extensions.sanitize
 
 class MrzBuilder(
     val opt: MrzParserOptions
@@ -33,25 +39,28 @@ class MrzBuilder(
         return Mrz(
             format = format ?: throw MrzParserException(ErrorType.WrongFormat()),
             documentType = documentType ?: throw MrzParserException(ErrorType.WrongFormat()),
-            countryCode = countryCode,
+            countryCode = countryCode.sanitize(),
             surnames = surnames,
             givenNames = givenNames,
-            documentNumber = documentNumber,
+            documentNumber = documentNumber.sanitize(),
             documentNumberHashValid = checkHash(documentNumber, documentNumberHash, "documentNumber", opt),
-            nationalityCountryCode = nationalityCountryCode,
+            nationalityCountryCode = nationalityCountryCode.sanitize(),
             birthdate = birthdate.extractDate(DateExtensions.mrzDateFormat),
             birthdateHashValid = checkHash(birthdate, birthdateHash, "birthdate", opt),
             sex = sex,
             expiryDate = expiryDate.extractDate(DateExtensions.mrzDateExpiryFormat),
             expiryDateHashValid = checkHash(expiryDate, expiryDateHash, "expiryDate", opt),
-            optionalData = optionalData,
-            optionalData2 = optionalData2,
+            optionalData = optionalData.sanitize(),
+            optionalData2 = optionalData2.sanitize(),
             finalHashValid = checkHash(finalHashString, finalHash, "finalHash", opt),
+            key = "$documentNumber${documentNumber.computeCheckDigit(opt.lenient)}" +
+                "$birthdate${birthdate.computeCheckDigit(opt.lenient)}" +
+                "$expiryDate${expiryDate.computeCheckDigit(opt.lenient)}"
         )
     }
 
     private fun checkHash(s: String, expected: Int, partName: String, opt: MrzParserOptions): Boolean {
-        val actual = s.computeCheckDigit()
+        val actual = s.computeCheckDigit(opt.lenient)
         return (expected == actual).also {
             if (!it) {
                 if (LogDefines.verbose) {

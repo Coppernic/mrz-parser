@@ -1,13 +1,12 @@
 package fr.coppernic.lib.mrz.parser.generic
 
 import fr.coppernic.lib.mrz.Mrz
-import fr.coppernic.lib.mrz.model.MrzBuilder
 import fr.coppernic.lib.mrz.model.MrzDocumentType
 import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzSex
 import fr.coppernic.lib.mrz.parser.DocumentParser
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
-import fr.coppernic.lib.mrz.parser.extensions.extract
+import fr.coppernic.lib.mrz.parser.builder.MrzBuilder
 import fr.coppernic.lib.mrz.parser.extensions.extractNames
 import fr.coppernic.lib.mrz.parser.extensions.extractNumber
 
@@ -39,17 +38,17 @@ internal class Td1Parser : DocumentParser {
         return MrzBuilder(opt).apply {
             format = MrzFormat.TD1
             documentType = MrzDocumentType.fromMrz(first.substring(docRange))
-            countryCode = first.extract(countryRange)
+            countryCode = first.substring(countryRange)
             documentNumber = first.substring(documentNumberRange)
             documentNumberHash = first.extractNumber(documentNumberHashRange)
-            optionalData = first.extract(opt1Range)
+            optionalData = first.substring(opt1Range)
             birthdate = second.substring(birthDateRange)
             birthdateHash = second.extractNumber(birthdayHashRange)
             sex = MrzSex.fromMrz(second[sexRange])
             expiryDate = second.substring(expiryDateRange)
             expiryDateHash = second.extractNumber(expiryDateHashRange)
-            nationalityCountryCode = second.extract(natRange)
-            optionalData2 = second.extract(opt2Range)
+            nationalityCountryCode = second.substring(natRange)
+            optionalData2 = second.substring(opt2Range)
             finalHashString = listOfRangesForFinalHash.joinToString("") {
                 lines[it.first].substring(it.second)
             }

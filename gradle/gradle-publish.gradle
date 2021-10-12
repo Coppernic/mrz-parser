@@ -30,12 +30,6 @@ publishing {
                         distribution = POM_LICENCE_DIST
                     }
                 }
-                developers {
-                    developer {
-                        id = POM_DEVELOPER_ID
-                        name = POM_DEVELOPER_NAME
-                    }
-                }
                 scm {
                     url = POM_SCM_URL
                     connection = POM_SCM_CONNECTION

@@ -20,7 +20,7 @@ String passwordNexus = project.hasProperty('nexusPassword') ?
 
 publishing {
     publications {
-        art(MavenPublication) {
+        MrzParserLib(MavenPublication) {
             groupId GROUP
             artifactId "$rootProject.name"
             version versioning.info.display

@@ -3,15 +3,22 @@ package fr.coppernic.lib.mrz.parser.extensions
 import fr.coppernic.lib.log.LogDefines
 import fr.coppernic.lib.mrz.model.ErrorType
 import fr.coppernic.lib.mrz.model.MrzParserException
+import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.fillCharacter
+import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.nameDelimiter
 import java.text.SimpleDateFormat
 import java.util.Date
 
-internal fun String.sanitize(): String = replace("<", " ").trim()
+private object MrzRegexes {
+    val fillCharacter = "(<)+".toRegex()
+    const val nameDelimiter = "<<"
+}
+
+internal fun String.sanitize(): String = replace(fillCharacter, " ").trim()
 
 internal fun String.extractNumber(r: IntRange): Int = substring(r).sanitize().toIntOrNull() ?: 0
 
 internal fun String.extractNames(r: IntRange = 0 until length): Pair<String, String> =
-    substring(r).split("<<").run {
+    substring(r).split(nameDelimiter).run {
         (getOrElse(0) { "" }.sanitize()) to (getOrElse(1) { "" }.sanitize())
     }
 

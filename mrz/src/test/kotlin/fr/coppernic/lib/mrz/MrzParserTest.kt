@@ -4,6 +4,7 @@ import fr.coppernic.lib.mrz.model.MrzFormat
 import fr.coppernic.lib.mrz.model.MrzParserException
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID
+import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID2
 import fr.coppernic.lib.mrz.resources.Resources.MRVA
 import fr.coppernic.lib.mrz.resources.Resources.MRVB
 import fr.coppernic.lib.mrz.resources.Resources.NETHERLAND_PASSPORT
@@ -15,6 +16,7 @@ import fr.coppernic.lib.mrz.resources.Resources.TD2
 import fr.coppernic.lib.mrz.resources.Resources.TD3
 import fr.coppernic.lib.mrz.resources.Resources.TD3_WRONG
 import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID
+import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID2
 import fr.coppernic.lib.mrz.resources.Resources.mrzMRVA
 import fr.coppernic.lib.mrz.resources.Resources.mrzMRVB
 import fr.coppernic.lib.mrz.resources.Resources.mrzNetherlandPassport
@@ -89,6 +91,11 @@ class MrzParserTest {
     @Test
     fun testFrenchID() {
         sut.parse(FRENCH_ID).shouldBeEqualTo(mrzFrenchID)
+    }
+
+    @Test
+    fun testFrenchID2() {
+        sut.parse(FRENCH_ID2).shouldBeEqualTo(mrzFrenchID2)
     }
 
     @Test

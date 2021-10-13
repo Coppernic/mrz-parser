@@ -14,7 +14,7 @@ import fr.coppernic.lib.mrz.parser.extensions.computeCheckDigit
 import fr.coppernic.lib.mrz.parser.extensions.extractDate
 import fr.coppernic.lib.mrz.parser.extensions.sanitize
 
-class MrzBuilder(
+internal class MrzBuilder(
     val opt: MrzParserOptions
 ) {
     var format: MrzFormat? = null
@@ -34,6 +34,7 @@ class MrzBuilder(
     var optionalData2: String = ""
     var finalHashString: String = ""
     var finalHash: Int = 0
+    var fullMrz: String = ""
 
     fun build(): Mrz {
         return Mrz(
@@ -55,7 +56,8 @@ class MrzBuilder(
             finalHashValid = checkHash(finalHashString, finalHash, "finalHash", opt),
             key = "$documentNumber${documentNumber.computeCheckDigit(opt.lenient)}" +
                 "$birthdate${birthdate.computeCheckDigit(opt.lenient)}" +
-                "$expiryDate${expiryDate.computeCheckDigit(opt.lenient)}"
+                "$expiryDate${expiryDate.computeCheckDigit(opt.lenient)}",
+            mrzString = fullMrz
         )
     }
 

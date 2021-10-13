@@ -59,6 +59,7 @@ internal class Td3Parser : DocumentParser {
                 surnames = it.first
                 givenNames = it.second
             }
+            fullMrz = lines.joinToString("\n")
         }.build()
     }
 }

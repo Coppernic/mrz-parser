@@ -22,6 +22,7 @@ data class Mrz(
     val optionalData: String?,
     val optionalData2: String?,
     val key: String,
+    val mrzString: String,
     val documentNumberHashValid: Boolean = true,
     val birthdateHashValid: Boolean = true,
     val expiryDateHashValid: Boolean = true,

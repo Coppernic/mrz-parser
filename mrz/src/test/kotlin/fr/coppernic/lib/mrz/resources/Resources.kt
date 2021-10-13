@@ -27,6 +27,7 @@ object Resources {
         optionalData = "",
         optionalData2 = "",
         key = "D23145890774081221204159",
+        mrzString = TD1,
     )
 
     val TD1_WRONG = """
@@ -52,6 +53,7 @@ object Resources {
         optionalData = "",
         optionalData2 = "",
         key = "D23145890774081221204159",
+        mrzString = TD2,
     )
 
     val TD3 = """
@@ -72,6 +74,7 @@ object Resources {
         optionalData = "ZE184226B",
         optionalData2 = "",
         key = "L898902C3674081221204159",
+        mrzString = TD3,
     )
 
     val PASSPORT_D = """
@@ -95,6 +98,7 @@ object Resources {
         expiryDateHashValid = false,
         finalHashValid = false,
         key = "242411010369080831208021",
+        mrzString = PASSPORT_D,
     )
 
     val PASSPORT_R = """
@@ -115,6 +119,7 @@ object Resources {
         optionalData2 = "",
         nationalityCountryCode = "RUS",
         key = "110400000882091202601157",
+        mrzString = PASSPORT_R,
     )
 
     val RUSSIAN_PASSPORT = """
@@ -135,6 +140,7 @@ object Resources {
         optionalData2 = "",
         nationalityCountryCode = "RUS",
         key = "39193534987207233<<<<<<0",
+        mrzString = RUSSIAN_PASSPORT,
     )
 
     val NETHERLAND_PASSPORT = """
@@ -155,6 +161,7 @@ object Resources {
         optionalData = "999999990",
         optionalData2 = "",
         key = "SPECI2014265031012403096",
+        mrzString = NETHERLAND_PASSPORT,
     )
 
     val MRVA = """
@@ -175,6 +182,7 @@ object Resources {
         optionalData = "6ZE184226B",
         optionalData2 = "",
         key = "L8988901C440090789612109",
+        mrzString = MRVA,
     )
 
     val MRVB = """
@@ -195,6 +203,7 @@ object Resources {
         optionalData = "",
         optionalData2 = "",
         key = "L8988901C440090789612109",
+        mrzString = MRVB,
     )
 
     val FRENCH_ID = """
@@ -215,6 +224,7 @@ object Resources {
         expiryDate = null,
         nationalityCountryCode = "",
         key = "880692310285865120680",
+        mrzString = FRENCH_ID,
     )
 
     val TD3_WRONG = """
@@ -238,6 +248,7 @@ object Resources {
         documentNumberHashValid = false,
         birthdateHashValid = false,
         expiryDateHashValid = false,
-        finalHashValid = false
+        finalHashValid = false,
+        mrzString = TD3_WRONG,
     )
 }

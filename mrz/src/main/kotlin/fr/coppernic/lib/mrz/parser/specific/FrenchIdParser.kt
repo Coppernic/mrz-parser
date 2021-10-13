@@ -52,6 +52,7 @@ internal class FrenchIdParser : DocumentParser {
             finalHash = second.substring(finalHashRange).toInt()
             surnames = first.substring(surnameRange).sanitize()
             givenNames = second.substring(givenNameRange).sanitize()
+            fullMrz = lines.joinToString("\n")
         }.build()
     }
 }

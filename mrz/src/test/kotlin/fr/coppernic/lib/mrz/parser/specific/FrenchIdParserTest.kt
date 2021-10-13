@@ -1,6 +1,6 @@
 package fr.coppernic.lib.mrz.parser.specific
 
-import fr.coppernic.lib.log.LogDefines
+import fr.coppernic.lib.log.MrzParserDefines
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources
 import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID
@@ -14,7 +14,7 @@ class FrenchIdParserTest {
 
     @Before
     fun setUp() {
-        LogDefines.verbose = true
+        MrzParserDefines.verbose = true
         sut = FrenchIdParser()
     }
 

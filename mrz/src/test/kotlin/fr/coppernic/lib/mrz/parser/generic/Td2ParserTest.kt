@@ -1,6 +1,6 @@
 package fr.coppernic.lib.mrz.parser.generic
 
-import fr.coppernic.lib.log.LogDefines
+import fr.coppernic.lib.log.MrzParserDefines
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources
 import fr.coppernic.lib.mrz.resources.Resources.mrzTD2
@@ -14,7 +14,7 @@ class Td2ParserTest {
 
     @Before
     fun setUp() {
-        LogDefines.verbose = true
+        MrzParserDefines.verbose = true
         sut = Td2Parser()
     }
 

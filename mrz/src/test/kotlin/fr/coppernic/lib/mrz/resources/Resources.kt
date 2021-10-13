@@ -272,4 +272,25 @@ object Resources {
         key = "210113353744485052790",
         mrzString = FRENCH_ID2,
     )
+
+    val FRENCH_ID3 = (
+        "IDFRANEYRIER<<<<<<<<<<<<<<<<<<013029\r" +
+            "2101133537444MICHEL<<JEAN<<8505279M1\r"
+        )
+    val mrzFrenchID3 = Mrz(
+        format = MrzFormat.FRENCH_ID,
+        documentType = MrzDocumentType.TypeI,
+        countryCode = "FRA",
+        surnames = "NEYRIER",
+        givenNames = "MICHEL JEAN",
+        documentNumber = "210113353744",
+        birthdate = Td3ParserTest.dateFormat.parse("1985-05-27"),
+        sex = MrzSex.Male,
+        optionalData = "013029",
+        optionalData2 = "",
+        expiryDate = null,
+        nationalityCountryCode = "",
+        key = "210113353744485052790",
+        mrzString = FRENCH_ID2,
+    )
 }

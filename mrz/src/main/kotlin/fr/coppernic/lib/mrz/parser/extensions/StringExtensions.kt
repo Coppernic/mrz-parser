@@ -1,19 +1,25 @@
 package fr.coppernic.lib.mrz.parser.extensions
 
-import fr.coppernic.lib.log.LogDefines
+import fr.coppernic.lib.log.MrzParserDefines
 import fr.coppernic.lib.mrz.model.ErrorType
 import fr.coppernic.lib.mrz.model.MrzParserException
-import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.fillCharacter
+import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.fillCharacterRegex
 import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.nameDelimiter
+import fr.coppernic.lib.mrz.parser.extensions.MrzRegexes.newLineRegex
 import java.text.SimpleDateFormat
 import java.util.Date
 
 private object MrzRegexes {
-    val fillCharacter = "(<)+".toRegex()
+    val fillCharacterRegex = "(<)+".toRegex()
+    val newLineRegex = "(\n\r)|(\r)".toRegex()
     const val nameDelimiter = "<<"
 }
 
-internal fun String.sanitize(): String = replace(fillCharacter, " ").trim()
+internal fun String.separate() = replace(newLineRegex, "\n")
+    .trim()
+    .split("\n")
+
+internal fun String.sanitize(): String = replace(fillCharacterRegex, " ").trim()
 
 internal fun String.extractNumber(r: IntRange): Int = substring(r).sanitize().toIntOrNull() ?: 0
 
@@ -33,10 +39,19 @@ internal fun String.extractDate(format: SimpleDateFormat): Date? {
     return try {
         format.parse(this)
     } catch (e: Exception) {
-        if (LogDefines.verbose) {
-            LogDefines.LOG.debug("$e, during parsing of $this with format ${format.toPattern()}")
+        if (MrzParserDefines.verbose) {
+            MrzParserDefines.LOG.debug("$e, during parsing of $this with format ${format.toPattern()}")
         }
         null
+    }
+}
+
+internal fun String.divide(n: Int): MutableList<String> {
+    val len = length / n
+    return mutableListOf<String>().apply {
+        for (i: Int in 0 until n) {
+            add(substring((i * len) until (i * len + len)))
+        }
     }
 }
 

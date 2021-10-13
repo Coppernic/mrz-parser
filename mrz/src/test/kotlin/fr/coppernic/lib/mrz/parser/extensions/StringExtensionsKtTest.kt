@@ -35,4 +35,44 @@ class StringExtensionsKtTest {
                 "34071279507122<<<<<<<<<<<"
             ).computeCheckDigit().`should be equal to`(2)
     }
+
+    @Test
+    fun divide() {
+        "IDFRAAZERTYU<<<<<<<<<<<<<<<<<<5482947621133537444QSDFGHJ<<POIUY1234563M3"
+            .divide(2)
+            .`should be equal to`(
+                listOf(
+                    "IDFRAAZERTYU<<<<<<<<<<<<<<<<<<548294",
+                    "7621133537444QSDFGHJ<<POIUY1234563M3"
+                )
+            )
+        (
+            "I<UTOD231458907<<<<<<<<<<<<<<<" +
+                "7408122F1204159UTO<<<<<<<<<<<6" +
+                "ERIKSSON<<ANNA<MARIA<<<<<<<<<<"
+            )
+            .divide(3)
+            .`should be equal to`(
+                listOf(
+                    "I<UTOD231458907<<<<<<<<<<<<<<<",
+                    "7408122F1204159UTO<<<<<<<<<<<6",
+                    "ERIKSSON<<ANNA<MARIA<<<<<<<<<<"
+                )
+            )
+    }
+
+    @Test
+    fun split() {
+        (
+            "IDFRAAZERTYU<<<<<<<<<<<<<<<<<<548294\r" +
+                "7621133537444QSDFGHJ<<POIUY1234563M3\r"
+            )
+            .separate()
+            .`should be equal to`(
+                listOf(
+                    "IDFRAAZERTYU<<<<<<<<<<<<<<<<<<548294",
+                    "7621133537444QSDFGHJ<<POIUY1234563M3"
+                )
+            )
+    }
 }

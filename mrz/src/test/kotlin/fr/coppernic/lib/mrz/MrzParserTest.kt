@@ -5,6 +5,7 @@ import fr.coppernic.lib.mrz.model.MrzParserException
 import fr.coppernic.lib.mrz.parser.MrzParserOptions
 import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID
 import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID2
+import fr.coppernic.lib.mrz.resources.Resources.FRENCH_ID3
 import fr.coppernic.lib.mrz.resources.Resources.MRVA
 import fr.coppernic.lib.mrz.resources.Resources.MRVB
 import fr.coppernic.lib.mrz.resources.Resources.NETHERLAND_PASSPORT
@@ -17,6 +18,7 @@ import fr.coppernic.lib.mrz.resources.Resources.TD3
 import fr.coppernic.lib.mrz.resources.Resources.TD3_WRONG
 import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID
 import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID2
+import fr.coppernic.lib.mrz.resources.Resources.mrzFrenchID3
 import fr.coppernic.lib.mrz.resources.Resources.mrzMRVA
 import fr.coppernic.lib.mrz.resources.Resources.mrzMRVB
 import fr.coppernic.lib.mrz.resources.Resources.mrzNetherlandPassport
@@ -116,5 +118,35 @@ class MrzParserTest {
     @Test
     fun testLenientParsing() {
         sut.parse(TD3_WRONG, MrzParserOptions(lenient = true)).shouldBeEqualTo(mrzTD3Wrong)
+    }
+
+    @Test
+    fun testTD1SingleLine() {
+        val line = TD1.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD1)
+    }
+
+    @Test
+    fun testTD12SingleLine() {
+        val line = TD2.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD2)
+    }
+
+    @Test
+    fun testTD3SingleLine() {
+        val line = TD3.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD3)
+    }
+
+    @Test
+    fun testFrenchSingleLine() {
+        val line = FRENCH_ID.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzFrenchID)
+    }
+
+    @Test
+    fun testFrenchSingleLineWithCarriageReturn() {
+        val line = FRENCH_ID3
+        sut.parse(line).`should be equal to`(mrzFrenchID3)
     }
 }

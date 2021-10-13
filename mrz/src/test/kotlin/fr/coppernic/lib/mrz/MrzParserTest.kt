@@ -117,4 +117,22 @@ class MrzParserTest {
     fun testLenientParsing() {
         sut.parse(TD3_WRONG, MrzParserOptions(lenient = true)).shouldBeEqualTo(mrzTD3Wrong)
     }
+
+    @Test
+    fun testTD1SingleLine() {
+        val line = TD1.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD1)
+    }
+
+    @Test
+    fun testTD12SingleLine() {
+        val line = TD2.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD2)
+    }
+
+    @Test
+    fun testTD3SingleLine() {
+        val line = TD3.trim().replace("\n", "")
+        sut.parse(line).`should be equal to`(mrzTD3)
+    }
 }

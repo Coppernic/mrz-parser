@@ -40,6 +40,15 @@ internal fun String.extractDate(format: SimpleDateFormat): Date? {
     }
 }
 
+internal fun String.divide(n: Int): MutableList<String> {
+    val len = length / n
+    return mutableListOf<String>().apply {
+        for (i: Int in 0 until n) {
+            add(substring((i * len) until (i * len + len)))
+        }
+    }
+}
+
 internal fun Char.toNumber(lenient: Boolean = false): Int {
     return when (this) {
         in 'A'..'Z' -> this - 'A' + 10

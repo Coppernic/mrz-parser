@@ -18,6 +18,14 @@ String passwordNexus = project.hasProperty('nexusPassword') ?
         project.properties.nexus_password.toString() : (System.getenv('NEXUS_PASSWORD') ?
         System.getenv('NEXUS_PASSWORD') : "")))
 
+def isSnapshot() {
+    return versioning.info.versionNumber.qualifier.contains("SNAPSHOT") ||
+            (versioning.info.versionNumber.major == 0
+                    && versioning.info.versionNumber.minor == 0
+                    && versioning.info.versionNumber.patch == 0
+            )
+}
+
 publishing {
     publications {
         MrzParserLib(MavenPublication) {
@@ -52,7 +60,7 @@ publishing {
         maven {
             String urlRelease = "https://nexus.coppernic.fr/repository/libs-release-coppernic/"
             String urlSnapshot = "https://nexus.coppernic.fr/repository/libs-snapshot-coppernic/"
-            url = (versioning.info.versionNumber.qualifier.contains("SNAPSHOT")?urlSnapshot:urlRelease)
+            url = (isSnapshot() ? urlSnapshot : urlRelease)
             credentials {
                 username = userNexus
                 password = passwordNexus
@@ -60,3 +68,4 @@ publishing {
         }
     }
 }
+

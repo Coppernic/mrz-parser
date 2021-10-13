@@ -10,15 +10,6 @@ publishing {
 
             from components.java
 
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-
             pom {
                 name = rootProject.name
                 description = POM_DESCRIPTION

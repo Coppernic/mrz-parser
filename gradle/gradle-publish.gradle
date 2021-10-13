@@ -20,7 +20,7 @@ String passwordNexus = project.hasProperty('nexusPassword') ?
 
 publishing {
     publications {
-        art(MavenPublication) {
+        MrzParserLib(MavenPublication) {
             groupId GROUP
             artifactId "$rootProject.name"
             version versioning.info.display
@@ -50,7 +50,9 @@ publishing {
     }
     repositories {
         maven {
-            url = "https://nexus.coppernic.fr/repository/libs-release-coppernic/"
+            String urlRelease = "https://nexus.coppernic.fr/repository/libs-release-coppernic/"
+            String urlSnapshot = "https://nexus.coppernic.fr/repository/libs-snapshot-coppernic/"
+            url = (versioning.info.versionNumber.qualifier.contains("SNAPSHOT")?urlSnapshot:urlRelease)
             credentials {
                 username = userNexus
                 password = passwordNexus

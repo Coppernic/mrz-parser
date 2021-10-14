@@ -97,7 +97,7 @@ object Resources {
         // Issue in hash
         expiryDateHashValid = false,
         finalHashValid = false,
-        key = "242411010369080831208021",
+        key = "242411010369080831208024",
         mrzString = PASSPORT_D,
     )
 
@@ -244,7 +244,7 @@ object Resources {
         expiryDate = null,
         optionalData = "ZE184226B",
         optionalData2 = "",
-        key = "L898*02C39740*126120*151",
+        key = "L898*02C36740*122120*159",
         documentNumberHashValid = false,
         birthdateHashValid = false,
         expiryDateHashValid = false,

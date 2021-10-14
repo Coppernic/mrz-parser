@@ -54,9 +54,9 @@ internal class MrzBuilder(
             optionalData = optionalData.sanitize(),
             optionalData2 = optionalData2.sanitize(),
             finalHashValid = checkHash(finalHashString, finalHash, "finalHash", opt),
-            key = "$documentNumber${documentNumber.computeCheckDigit(opt.lenient)}" +
-                "$birthdate${birthdate.computeCheckDigit(opt.lenient)}" +
-                "$expiryDate${expiryDate.computeCheckDigit(opt.lenient)}",
+            key = "$documentNumber$documentNumberHash" +
+                "$birthdate$birthdateHash" +
+                "$expiryDate$expiryDateHash",
             mrzString = fullMrz
         )
     }

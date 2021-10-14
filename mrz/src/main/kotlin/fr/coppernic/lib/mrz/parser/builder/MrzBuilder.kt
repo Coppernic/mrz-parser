@@ -1,7 +1,7 @@
 package fr.coppernic.lib.mrz.parser.builder
 
-import fr.coppernic.lib.log.LogDefines
-import fr.coppernic.lib.log.LogDefines.LOG
+import fr.coppernic.lib.log.MrzParserDefines
+import fr.coppernic.lib.log.MrzParserDefines.LOG
 import fr.coppernic.lib.mrz.Mrz
 import fr.coppernic.lib.mrz.model.ErrorType
 import fr.coppernic.lib.mrz.model.MrzDocumentType
@@ -65,7 +65,7 @@ internal class MrzBuilder(
         val actual = s.computeCheckDigit(opt.lenient)
         return (expected == actual).also {
             if (!it) {
-                if (LogDefines.verbose) {
+                if (MrzParserDefines.verbose) {
                     LOG.trace("Computing hash for $partName=$s : Expecting $expected, computed $actual")
                 }
                 if (opt.lenient) {
